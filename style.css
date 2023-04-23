@@ -1,0 +1,131 @@
+a,
+article,
+section,
+p,
+h1,
+h2,
+h3,
+div,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+ul,
+li {
+    list-style: none;
+    padding: 0;
+}
+
+button {
+    border: 0;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+header {
+    background-color: #FFA500;
+}
+
+main {
+    background-color: #FFFAF0;
+}
+
+.h-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: calc(1440px - 60px);
+    margin: auto;
+}
+
+.top-logo {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+}
+
+.top-list {
+    display: flex;
+    gap: 10px;
+}
+
+.top-menu {
+    font-size: 20px;
+    text-decoration: underline;
+    background-color: gray;
+    color: beige;
+}
+
+
+.quick-wrap {
+    display: flex;
+    max-width: calc(1440px - 60px);
+    margin: auto;
+}
+
+.quickWrite {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-right: 2px solid #FF4F6E;
+    padding-right: 40px;
+}
+
+.quick-content{
+    margin: 20px 0 0 40px;
+}
+
+input {
+    display: block;
+    width: 300px;
+    height: 30px;
+    margin-bottom: 10px;
+}
+
+textarea {
+    display: block;
+    width: 300px;
+    height: 300px;
+    margin-bottom: 10px;
+}
+
+.menu-btn {
+    display: block;
+    width: 306px;
+    height: 30px;
+    background-color: #29363D;
+    color: #fff;
+}
+
+
+/* 내용이 없을 경우, 화면에 점이 생김 */
+#display {
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+
+#display p {
+    margin: 10px 0 0 10px;
+}
+
+#display h2 {
+    margin-left: 10px;
+}
+
+#display button {
+    display: block;
+    width: 306px;
+    height: 30px;
+    background-color: #29363D;
+    color: #fff;
+    margin: 10px;
+    border-radius: 10px;
+}

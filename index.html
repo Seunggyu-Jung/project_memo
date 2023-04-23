@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TDL Project</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <header>
+            <div class="h-wrap">
+                <a href="#"><img class="top-logo" src="./DdongQ-Cafe (1).png" alt="A dog picture stairing anywhere"></a>
+            <h1 class="title">쓱싹쓱싹 메모장</h1>
+            <ul class="top-list">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">News</a></li>
+                <li><a href="#">Guide</a></li>
+                <li><a href="#">Community</a></li>
+                <li><button class="top-menu">Menu</button></li>
+            </ul>
+            </div>
+    </header>
+    <main>
+        <div class="quick-wrap">
+            <section class="quickWrite">
+                <h2><p>Quick Menu</p></h2>
+                <input type="text" name="" id="title" placeholder="제목" />
+                <textarea name="" id="content" cols="30" rows="10" placeholder="메모할 내용이 무엇인가요??"></textarea>
+                <button class="menu-btn" onclick="saveNote()">메모</button>
+            </section>
+            <div class="quick-content">
+                <section id="display"></section>
+            </div>
+        </div>
+        
+    </main>
+    <footer></footer>
+    <script>
+        let allMemo = JSON.parse(localStorage.getItem("allMemo"));
+        allMemo = allMemo ?? [];
+        render();
+
+        function saveNote() {
+            const title = document.getElementById("title").value;
+            const content = document.getElementById("content").value;
+
+            allMemo.push({ title, content, len: allMemo.length });
+
+            localStorage.setItem("allMemo", JSON.stringify(allMemo));
+            render();
+        }
+
+        function render() {
+            const display = document.getElementById("display");
+            display.innerHTML = "";
+
+
+            for (const item of allMemo) {
+                const saveTitle = document.createElement("h2");
+                const saveContent = document.createElement("p");
+                const saveId = document.createElement("p");
+                const deleteMemoBtn = document.createElement("button");
+
+                saveTitle.textContent = item.title;
+                saveContent.textContent = item.content;
+                saveId.textContent = item.len + 1;
+                deleteMemoBtn.textContent = "삭제";
+                deleteMemoBtn.setAttribute("id", item.len);
+                deleteMemoBtn.setAttribute("onclick", "remove()");
+
+                display.appendChild(saveId);
+                display.appendChild(saveTitle);
+                display.appendChild(saveContent);
+                display.appendChild(deleteMemoBtn);
+            }
+        }
+
+        function remove() {
+            
+            const idx = allMemo.find(
+                (item) => item.len == event.srcElement.id
+            );
+            if (idx) {
+                allMemo.splice(
+                    allMemo.findIndex((item) => item.len == idx.len),
+                    1
+                );
+            }
+            localStorage.setItem("allMemo", JSON.stringify(allMemo));
+            render();
+        }
+    </script>
+</body>
+</html>
