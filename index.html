@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TDL Project</title>
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css">
+    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 </head>
 <body>
     <header>
@@ -24,7 +26,7 @@
     <main>
         <div class="quick-wrap">
             <section class="quickWrite">
-                <h2><p>Quick Menu</p></h2>
+                <h2><p>Quick Memo</p></h2>
                 <input type="text" name="" id="title" placeholder="제목" />
                 <textarea name="" id="content" cols="30" rows="10" placeholder="메모할 내용이 무엇인가요??"></textarea>
                 <button class="menu-btn" onclick="saveNote()">메모</button>
@@ -33,13 +35,33 @@
                 <section id="display"></section>
             </div>
         </div>
-        
+
+        <div class="detailed-wrap">
+            <section class="detailedWrite">
+                <h2><p>Detailed Memo</p></h2>
+                <input type="text" id="title2" placeholder="제목">
+                <div id="editor"></div>
+                <button class="menu-btn" onclick="saveNote2()">메모</button>
+            </section>
+            <section id="display2"></section>
+        </div>
     </main>
     <footer></footer>
     <script>
         let allMemo = JSON.parse(localStorage.getItem("allMemo"));
         allMemo = allMemo ?? [];
+
+        const Editor = toastui.Editor;
+
+        const editor = new Editor({
+            el : document.querySelector("#editor"),
+            height : "800px",
+            initalEditType: "markdown",
+            previewStyle: "vertical"
+        });
+
         render();
+        render2();
 
         function saveNote() {
             const title = document.getElementById("title").value;
@@ -51,6 +73,19 @@
             render();
         }
 
+        function saveNote2() {
+            const title = document.getElementById("title2").value;
+            const content = editor.getHTML();
+
+            allMemo.push({ title, content, len: allMemo.length });
+
+            localStorage.setItem("allMemo", JSON.stringify(allMemo));
+            render2();
+        }
+
+
+
+        // Quick Memo
         function render() {
             const display = document.getElementById("display");
             display.innerHTML = "";
@@ -76,6 +111,32 @@
             }
         }
 
+        // Detailed Memo
+        function render2() {
+            const display2 = document.getElementById("display2");
+            display2.innerHTML = "";
+
+
+            for (const item of allMemo) {
+                const saveTitle = document.createElement("h2");
+                const saveContent = document.createElement("div");
+                const saveId = document.createElement("p");
+                const deleteMemoBtn = document.createElement("button");
+
+                saveTitle.textContent = item.title;
+                saveContent.innerHTML = item.content;
+                saveId.textContent = item.len + 1;
+                deleteMemoBtn.textContent = "삭제";
+                deleteMemoBtn.setAttribute("id", item.len);
+                deleteMemoBtn.setAttribute("onclick", "remove2()");
+
+                display2.appendChild(saveId);
+                display2.appendChild(saveTitle);
+                display2.appendChild(saveContent);
+                display2.appendChild(deleteMemoBtn);
+            }
+        }
+
         function remove() {
             
             const idx = allMemo.find(
@@ -89,6 +150,22 @@
             }
             localStorage.setItem("allMemo", JSON.stringify(allMemo));
             render();
+        }
+
+
+        function remove2() {
+            
+            const idx = allMemo.find(
+                (item) => item.len == event.srcElement.id
+            );
+            if (idx) {
+                allMemo.splice(
+                    allMemo.findIndex((item) => item.len == idx.len),
+                    1
+                );
+            }
+            localStorage.setItem("allMemo", JSON.stringify(allMemo));
+            render2();
         }
     </script>
 </body>

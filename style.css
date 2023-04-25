@@ -69,6 +69,12 @@ main {
     margin: auto;
 }
 
+.detailed-wrap {
+    display: flex;
+    max-width: calc(1440px - 60px);
+    margin: auto;
+}
+
 .quickWrite {
     display: flex;
     flex-direction: column;
