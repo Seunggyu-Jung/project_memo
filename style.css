@@ -164,6 +164,11 @@ textarea {
         
     }
 
+    .detailed-wrap {
+        max-width: calc(767px - 60px);
+        flex-direction: column;
+    }
+
     textarea {
         display: block;
         width: 300px;
