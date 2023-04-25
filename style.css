@@ -72,7 +72,7 @@ main {
 .detailed-wrap {
     display: flex;
     max-width: calc(1440px - 60px);
-    margin: auto;
+    margin: 40px auto;
 }
 
 .quickWrite {
@@ -161,6 +161,7 @@ textarea {
     .quick-wrap {
         max-width: calc(767px - 60px);
         flex-direction: column;
+        
     }
 
     textarea {
@@ -173,6 +174,7 @@ textarea {
     .quickWrite {
         border-right: 0px solid #FF4F6E;
         border-bottom: 1px solid #FF4F6E;
+        padding-right: 0;
         padding-bottom: 40px;
     }
 }
