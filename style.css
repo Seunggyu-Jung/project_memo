@@ -84,6 +84,10 @@ main {
     padding-right: 40px;
 }
 
+.detailedWrite h2{
+    margin-left: 60px;
+}
+
 .quick-content{
     margin: 20px 0 0 40px;
 }
@@ -117,6 +121,11 @@ textarea {
     border-radius: 10px;
 }
 
+#display,
+#display2 {
+    background-color: #FFA500;
+}
+
 
 #display p {
     margin: 10px 0 0 10px;
@@ -137,17 +146,18 @@ textarea {
 }
 
 
-@media (max-width : 1040px) {
+@media (max-width:1040px) and (min-width:768px) {
     .h-wrap {
-    max-width: calc(1040px - 60px);
+    max-width: calc(100% - 60px);
     }
 
     .quick-wrap {
-        max-width: calc(1040px - 60px);
+        max-width: calc(100% - 60px);
     }
 
     .detailed-wrap {
-        max-width: calc(1040px - 60px);
+        max-width: calc(100% - 60px);
+        flex-direction: column;
     }
 }
 
@@ -182,4 +192,20 @@ textarea {
         padding-right: 0;
         padding-bottom: 40px;
     }
+
+    .quick-content{
+        margin: 20px auto;
+    }
+
+    .detailed-wrap{
+        clip: rect(1px, 1px, 1px, 1px);
+        clip-path: inset(50%);
+        margin: -1px;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+    }
+
 }
